@@ -1,12 +1,19 @@
+function displaySVGPreview(svg){
+	document.getElementById("svg_preview").innerHTML = svg;
+		document.getElementById("svg_form").style.display = "block";
+}
+
 var fileUpload = document.getElementById("file_upload");
 fileUpload.addEventListener("change", function(){
 	var fileSvg = fileUpload.files[0];
 	var reader = new FileReader();
 	reader.readAsText(fileSvg);	
-	reader.onload = function(){
-		document.getElementById("svg_preview").innerHTML = reader.result;
-		document.getElementById("svg_form").style.display = "block";
-	}
+	reader.onload = displaySVGPreview(reader.result)
+});
+
+var svgTextarea = document.getElementById("svgTextarea");
+svgTextarea.addEventListener("input", function(event){
+	displaySVGPreview(event.target.value)
 });
 
 var playGround = function(){
